@@ -8,3 +8,7 @@ ADD 1-northwind-data.sql /docker-entrypoint-initdb.d
 EXPOSE 3306
 VOLUME /var/lib/mysql
 
+# healthcheck
+HEALTHCHECK --interval=60s --timeout=5s --retries=3 \
+   CMD mysqladmin ping -uroot -p${MYSQL_ROOT_PASSWORD} | grep alive || exit 1
+
