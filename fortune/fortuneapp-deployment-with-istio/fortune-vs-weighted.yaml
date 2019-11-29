@@ -1,0 +1,36 @@
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+   name: fortune-ingress-vs
+
+spec:
+   hosts:
+   - "*"
+   gateways:
+   - fortune-ingress.default.svc.cluster.local
+   http:
+   - match:
+     - uri:
+        exact: /v1
+     route:
+     - destination:
+        host: fortuneapp-svc.default.svc.cluster.local
+        weight: 70
+        port: 
+          number: 80
+     rewrite:
+        uri: /
+   http:
+   - match:
+     - uri:
+        exact: /v2
+     route:
+     - destination:
+        host: weather
+        weight: 30
+        port: 
+          number: 8080
+     rewrite:
+        uri: /

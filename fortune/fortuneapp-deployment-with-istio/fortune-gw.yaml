@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+
+kind: Gateway
+
+metadata:
+   name: fortune-ingress
+
+spec:
+   selector:
+      istio: ingressgateway
+   servers:
+   - hosts:
+      - "fortune.167.99.31.60.nip.io"
+      - "weather.167.99.31.60.nip.io"
+     port:
+        number: 80
+        protocol: HTTP
+        name: HTTP
+
+# fortuneapp-svc ClusterIP 10.245.214.237 <none>
+
+# Gateway -> VirtualService -> Destination Rule
+# fortune.167.99.31.60.nip.io/v1
