@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+   name: weather-egress
+spec:
+   hosts:
+   - api.openweather.org
+   ports:
+   - number: 80
+     protocol: HTTP
+     name: http
+   - number: 443
+     protocol: HTTP
+     name: https
+   location: MESH_EXTERNAL
+   resolution: DNS
